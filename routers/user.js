@@ -2,21 +2,20 @@
 const express = require('express')
 const router = express.Router()
 
-// require express-session
-const session = require('express-session')
 
-// require model
-const model = require('../models')
+const Models = require('../models')
 
-// untuk menghandle /user
 router.get('/', function(req, res) {
-	res.redirect('/')
-})
-
-router.get('/:id', function(req, res) {
 	res.render('users/index')
 })
+
+router.get('/:id', (req,res)=>{
+
+
+})
+
 
 
 
 module.exports = router
+

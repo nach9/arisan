@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     salt: DataTypes.STRING,
     role: DataTypes.STRING
+
   }, {
     classMethods: {
       associate: function(models) {
@@ -19,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate= models=>{
     User.hasMany(models.Owner)
-    User.belongsToMany(models.Group, {through:'UserGroup'})
+    User.belongsToMany(models.Group,{through:'UserGroup'})
+
 
   }
 

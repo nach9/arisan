@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Owner.associate= models=>{
     Owner.belongsTo(models.User)
-    Owner.hasOne(models.Group)
+    Owner.belongsTo(models.Group)
+    // Owner.hasOne(models.Group)
 
   }
 

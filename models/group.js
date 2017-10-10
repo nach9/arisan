@@ -12,5 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
+
+  Group.associate= models=>{
+    Group.belongsTo(models.Owner)
+    Group.belongsToMay(models.User{through:'UserGroup'})
+
+  }
   return Group;
 };

@@ -4,6 +4,10 @@ const app = express()
 
 const session = require('express-session')
 
+// require public
+app.use(express.static('./public'))
+
+
 // require body-parser
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))

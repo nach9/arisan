@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Owner)
     User.belongsToMany(models.Group,{through:'UserGroup'})
 
+
   }
 
   return User;

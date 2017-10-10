@@ -1,5 +1,7 @@
+// require express
 const express = require('express')
 const router = express.Router()
+
 
 const Models = require('../models')
 
@@ -16,3 +18,4 @@ router.get('/:id', (req,res)=>{
 
 
 module.exports = router
+

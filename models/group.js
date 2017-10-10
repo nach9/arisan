@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     startAt: DataTypes.DATE,
     closeAt: DataTypes.DATE,
     amount:DataTypes.INTEGER
+
   }, {
     classMethods: {
       associate: function(models) {
@@ -15,9 +16,11 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Group.associate= models=>{
+
     // Group.belongsTo(models.Owner)
     Group.hasOne(models.Owner)    
     Group.belongsToMany(models.User,{through:'UserGroup'})
+
 
   }
   return Group;

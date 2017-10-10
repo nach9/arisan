@@ -1,7 +1,13 @@
+// require express
 const express = require('express')
 const router = express.Router()
 
+
 const Models = require('../models')
+
+// require express-session
+const session = require('express-session')
+
 
 
 router.get('/', function(req, res) {

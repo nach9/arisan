@@ -3,10 +3,14 @@ const express = require('express')
 const app = express()
 
 const session = require('express-session')
+app.use(session({
+	secret: 'arisanyuk',
+	// resave: false,
+  	// saveUninitialized: true
+}))
 
 // require public
 app.use(express.static('./public'))
-
 
 // require body-parser
 const bodyParser = require('body-parser')

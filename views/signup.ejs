@@ -1,32 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <% include ./partials/head%>
-<body>
-    <h1>WELCOME TO ARISAN</h1>
-
-    <div class="container" id="wrap">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <form action="/signup" method="post" class="form" role="form">
-                    <legend>Sign Up</legend>
-                    <div class="row">
-                        <div class="col-xs-6 col-md-6">
-                            <input type="text" name="firstname" value="" class="form-control input-lg" placeholder="First Name"  />
-                        </div>
-                        <div class="col-xs-6 col-md-6">
-                            <input type="text" name="lastname" value="" class="form-control input-lg" placeholder="Last Name"  />
-                        </div>
-                    </div>
-                    <input type="text" name="email" value="" class="form-control input-lg" placeholder="Your Email"  />
-                    <input type="password" name="password" value="" class="form-control input-lg" placeholder="Password"  />
-                    <input type="password" name="confirm_password" value="" class="form-control input-lg" placeholder="Confirm Password"  />
-                    <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">Create Account</button>
-                </form>          
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <% include ./partials/nav%>
+  <div class="content-wrapper">
+    <!-- content here -->
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Register an Account</div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputName">First name</label>
+                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter first name">
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputLastName">Last name</label>
+                <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Enter last name">
+              </div>
             </div>
-        </div>            
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
+          </div>
+          <a class="btn btn-primary btn-block" href="/signup">Register</a>
+        </form>
+        <div class="text-center">
+          <a class="d-block small mt-3" href="/login">Login Page</a>
+        </div>
+      </div>
     </div>
-    <% include ./partials/bootstrap%>
+    <!-- /content -->
+  </div>
+    <% include ./partials/footer%>
+  </div>
 </body>
 </html>
-
-

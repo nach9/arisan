@@ -1,35 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <% include ./partials/head%>
-<body>
-	<h1>WELCOME TO ARISAN</h1>
-
-	<div class="container">
-		<div class="row vertical-offset-100">
-			<div class="col-md-4 col-md-offset-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Please Log in</h3>
-					</div>
-					<div class="panel-body">
-					<form action="/login" method="POST" role="form">
-						<fieldset>
-						<div class="form-group">
-							<input class="form-control" placeholder="E-mail" name="email" type="text" value="">
-						</div>
-						<div class="form-group">
-							<input class="form-control" placeholder="Password" name="password" type="password" value="">
-						</div>
-							<input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
-						</fieldset>
-						<br>
-						<p>Don't have an account! <a href="#">Sign Up Here</a>
-					</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<% include ./partials/bootstrap%>
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <% include ./partials/nav%>
+  <div class="content-wrapper">
+    <!-- content here -->
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">Login</div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
+          </div>
+          <a class="btn btn-primary btn-block" href="/login">Login</a>
+        </form>
+        <div class="text-center">
+          <a class="d-block small mt-3" href="/signup">Register an Account</a>
+        </div>
+      </div>
+    </div>
+    <!-- /content -->
+  </div>
+    <% include ./partials/footer%>
+  </div>
 </body>
 </html>

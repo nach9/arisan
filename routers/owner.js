@@ -2,34 +2,23 @@
 const express = require('express')
 const router = express.Router()
 
-
+// require model
 const Models = require('../models')
-
-// require express-session
-// const session = require('express-session')
-
-
-
-// router.get('/', function(req, res) {
-// 	res.render('owners/index')
-
-// })
 
 //get owners detail
 router.get('/',(req,res)=>{
-	// console.log(typeof req.session.userId)
 	let condition={
 		where:{UserId:req.session.userId},
 		include:[Models.Group]
 	}
 	Models.Owner.findAll(condition).then(dataOwner=>{
-		res.send(dataOwner)
+		res.render('owners/index', {rows: dataOwner})
 	})
 })
 
 //create group
 router.get('/create',(req,res)=>{
-	res.redirect() ///change here for load new group
+	res.render('owners/create')
 })
 
 //create group
@@ -39,17 +28,16 @@ router.post('/create',(req,res)=>{
 		description: req.body.description  ,
 		amount:req.body.amount
 	}
+	console.log(condition1)
 	Models.Group.create(condition1).then(newGroup=>{
 		let condition2={
 			UserId:req.params.id,
 			GroupId:newGroup.id
 		}
 		Models.Owner.create(condition2).then((newOwner)=>{
-			res.send('hi') ///<--------change here
+			res.redirect('/owner')
 		})
 	})
-
-
 })
 
 router.get('/:id/detail/:groupid' , (req,res)=>{

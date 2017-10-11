@@ -1,4 +1,6 @@
 'use strict';
+const fullname = require('../helpers/fullName')
+
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('User', {
     firstName: DataTypes.STRING,
@@ -24,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
 
 
   }
+
+  User.prototype.getFullName = function() {
+    return fullname(this.firstName, this.lastName)
+  };
 
   return User;
 };

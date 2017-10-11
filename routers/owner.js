@@ -6,19 +6,20 @@ const router = express.Router()
 const Models = require('../models')
 
 // require express-session
-const session = require('express-session')
+// const session = require('express-session')
 
 
 
-router.get('/', function(req, res) {
-	res.render('owners/index')
+// router.get('/', function(req, res) {
+// 	res.render('owners/index')
 
-})
+// })
 
 //get owners detail
-router.get('/:id',(req,res)=>{
+router.get('/',(req,res)=>{
+	// console.log(typeof req.session.userId)
 	let condition={
-		where:{UserId:req.params.id},
+		where:{UserId:req.session.userId},
 		include:[Models.Group]
 	}
 	Models.Owner.findAll(condition).then(dataOwner=>{
@@ -27,12 +28,12 @@ router.get('/:id',(req,res)=>{
 })
 
 //create group
-router.get('/:id/create',(req,res)=>{
+router.get('/create',(req,res)=>{
 	res.redirect() ///change here for load new group
 })
 
 //create group
-router.post('/:id/create',(req,res)=>{
+router.post('/create',(req,res)=>{
 	let condition1={
 		groupName: req.body.groupName,
 		description: req.body.description  ,

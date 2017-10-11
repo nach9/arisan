@@ -1,4 +1,5 @@
 'use strict';
+const statusGroup = require('../helpers/statusGroup')
 module.exports = (sequelize, DataTypes) => {
   var Group = sequelize.define('Group', {
     groupName: DataTypes.STRING,
@@ -16,12 +17,13 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Group.associate= models=>{
-
     // Group.belongsTo(models.Owner)
-    Group.hasOne(models.Owner)    
+    Group.hasOne(models.Owner)
     Group.belongsToMany(models.User,{through:'UserGroup'})
-
-
   }
+
+  Group.prototype.getStatusGroup = function () {
+    return statusGroup(this.startAt,this.closeAt)
+  };
   return Group;
 };

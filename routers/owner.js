@@ -5,6 +5,10 @@ const router = express.Router()
 // require model
 const Models = require('../models')
 
+// require helper for check authentication
+const checkAuth = require('../helpers/checkAuth')
+router.use(checkAuth)
+
 //get owners detail
 router.get('/',(req,res)=>{
 	let condition={
@@ -28,10 +32,9 @@ router.post('/create',(req,res)=>{
 		description: req.body.description  ,
 		amount:req.body.amount
 	}
-	console.log(condition1)
 	Models.Group.create(condition1).then(newGroup=>{
 		let condition2={
-			UserId:req.params.id,
+			UserId:req.session.userId,
 			GroupId:newGroup.id
 		}
 		Models.Owner.create(condition2).then((newOwner)=>{
@@ -40,30 +43,31 @@ router.post('/create',(req,res)=>{
 	})
 })
 
-router.get('/:id/detail/:groupid' , (req,res)=>{
+router.get('/detail/:groupid' , (req,res)=>{
 	let condition={
-		// where:{UserId:req.params.id},
 		include:[Models.User]
 	}
 	Models.Group.findById( req.params.groupid,condition).then(dataGroup=>{
-		res.send(dataGroup)
+		res.render('owners/detail', {rows: dataGroup})
 	})
 })
 
-
-router.get('/:id/detail/:groupid/add', (req,res)=>{
+// belum -----------------------------------------------------------------
+router.get('/:id/detail/:groupid/addmember', (req,res)=>{
 	Models.User.findAll().then((dataUser)=>{
 		res.send(dataUser)
 	})
 })
 
-router.post('/:id/detail/:groupid/add', (req,res)=>{
+router.post('/:id/detail/:groupid/addmember', (req,res)=>{
 	let condition={
 		UserId: req.body.UserId,
 		GroupId: req.params.groupid
 	}
+	console.log(condition)
 	Models.UserGroup.create(condition).then((newUser)=>{
-		res.send(newUser)
+		// res.send(newUser)
+		res.render('owners/addmember', {rows: newUser})
 	})
 })
 

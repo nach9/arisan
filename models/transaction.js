@@ -13,5 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
+
+  // Transaction.associate= models=>{
+  //   // Transaction.belongsTo(models.UserGroup)
+  //   Transaction.belongsTo(models.UserGroup)
+  //
+  // }
   return Transaction;
 };

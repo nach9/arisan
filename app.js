@@ -36,5 +36,9 @@ app.use('/owner', owner)
 const group = require('./routers/group')
 app.use('/group', group)
 
+// route transaction
+const transaction = require('./routers/transaction')
+app.use('/trx', transaction)
+
 app.listen(3000)
 console.log('Listening on port 3000')

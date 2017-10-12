@@ -12,7 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  
+  // UserGroup.associate= models=>{
+  //   UserGroup.hasMany(models.Transaction,{ foreignKey: 'UserGroupId'})
+  // }
+
+
 
   return UserGroup;
 };

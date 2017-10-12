@@ -11,11 +11,14 @@
         <li class="breadcrumb-item">
           <a href="/user">User</a>
         </li>
-        <li class="breadcrumb-item active">Group</li>
+        <li class="breadcrumb-item">
+          <a href="/owner">Owner</a>
+        </li>
+        <li class="breadcrumb-item active">Detail</li>
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
-      	<div class="card-header"><i class="fa fa-table"></i> Group List</div>
+      	<div class="card-header"><i class="fa fa-table"></i> Group Detail</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -23,17 +26,19 @@
                 <tr>
                   <th>ID</th>
                   <th>Group Name</th>
-                  <th>Action</th>
+                  <th>Group Description</th>
+                  <th>Amount</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-              <% rows.Groups.forEach((row) => { %>
                 <tr>
-                  <td><%= row.id %></td>
-                  <td><%= row.groupName %></td>
-                  <td><a href="/group/detail/<%= row.id %>">Detail</a></td>
+                  <td><%= rows.id %></td>
+                  <td><%= rows.groupName %></td>
+                  <td><%= rows.description %></td>
+                  <td><%= rows.amount %></td>
+                  <td></td>
                 </tr>
-              <% })%> 
               </tbody>
             </table>
           </div>

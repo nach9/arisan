@@ -2,34 +2,27 @@
 const express = require('express')
 const router = express.Router()
 
-
+// require model
 const Models = require('../models')
 
-// require express-session
-// const session = require('express-session')
-
-
-
-// router.get('/', function(req, res) {
-// 	res.render('owners/index')
-
-// })
+// require helper for check authentication
+const checkAuth = require('../helpers/checkAuth')
+router.use(checkAuth)
 
 //get owners detail
 router.get('/',(req,res)=>{
-	// console.log(typeof req.session.userId)
 	let condition={
 		where:{UserId:req.session.userId},
 		include:[Models.Group]
 	}
 	Models.Owner.findAll(condition).then(dataOwner=>{
-		res.send(dataOwner)
+		res.render('owners/index', {rows: dataOwner})
 	})
 })
 
 //create group
 router.get('/create',(req,res)=>{
-	res.redirect() ///change here for load new group
+	res.render('owners/create')
 })
 
 //create group
@@ -41,41 +34,40 @@ router.post('/create',(req,res)=>{
 	}
 	Models.Group.create(condition1).then(newGroup=>{
 		let condition2={
-			UserId:req.params.id,
+			UserId:req.session.userId,
 			GroupId:newGroup.id
 		}
 		Models.Owner.create(condition2).then((newOwner)=>{
-			res.send('hi') ///<--------change here
+			res.redirect('/owner')
 		})
 	})
-
-
 })
 
-router.get('/:id/detail/:groupid' , (req,res)=>{
+router.get('/detail/:groupid' , (req,res)=>{
 	let condition={
-		// where:{UserId:req.params.id},
 		include:[Models.User]
 	}
 	Models.Group.findById( req.params.groupid,condition).then(dataGroup=>{
-		res.send(dataGroup)
+		res.render('owners/detail', {rows: dataGroup})
 	})
 })
 
-
-router.get('/:id/detail/:groupid/add', (req,res)=>{
+// belum -----------------------------------------------------------------
+router.get('/:id/detail/:groupid/addmember', (req,res)=>{
 	Models.User.findAll().then((dataUser)=>{
 		res.send(dataUser)
 	})
 })
 
-router.post('/:id/detail/:groupid/add', (req,res)=>{
+router.post('/:id/detail/:groupid/addmember', (req,res)=>{
 	let condition={
 		UserId: req.body.UserId,
 		GroupId: req.params.groupid
 	}
+	console.log(condition)
 	Models.UserGroup.create(condition).then((newUser)=>{
-		res.send(newUser)
+		// res.send(newUser)
+		res.render('owners/addmember', {rows: newUser})
 	})
 })
 

@@ -14,10 +14,11 @@ const encrypt = require('../helpers/encrypt')
 // require helpers salt
 const salt = require('../helpers/generateSalt')
 
-// require helpers auth
-// const auth = require('../helpers/checkAuth')
+// require helper for check authentication
+const checkAuth = require('../helpers/checkAuth')
+// router.use(checkAuth)
 
-router.get('/', function(req, res) {
+router.get('/', checkAuth, function(req, res) {
 	res.redirect('login')
 })
 
@@ -32,8 +33,6 @@ router.post('/login', function(req, res) {
 			req.session.role = dataUser.role
 			req.session.userId = dataUser.id
 			req.session.fullname = dataUser.getFullName()
-
-			console.log(req.session)
 			res.redirect('/user')
 		} else {
 			res.redirect('/login')
@@ -45,6 +44,11 @@ router.get('/signup', function(req, res) {
 	res.render('signup')
 })
 
+router.get('/logout', function (req, res) {
+	req.session.destroy(function(err) {
+		res.redirect('/login')
+	})
+})
 
 module.exports = router
 

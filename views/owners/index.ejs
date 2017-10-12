@@ -5,7 +5,42 @@
   <% include ../partials/nav%>
   <div class="content-wrapper">
   	<!-- content here -->
-    
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/user">User</a>
+        </li>
+        <li class="breadcrumb-item active">Owner</li>
+      </ol>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+      	<div class="card-header"><i class="fa fa-table"></i> Group List</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Group Name</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% rows.forEach((row) => { %>
+                <tr>
+                  <td><%= row.Group.id %></td>
+                  <td><%= row.Group.groupName %></td>
+                  <td><a href="/owner/detail/<%= row.Group.id %>">Detail</a></td>
+                </tr>
+              <% })%> 
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted"><a href="/owner/create">Create New Grop</a></div>
+      </div>
+    </div>
     <!-- /content -->
 	</div>
     <% include ../partials/footer%>

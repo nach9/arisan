@@ -5,8 +5,8 @@ const app = express()
 const session = require('express-session')
 app.use(session({
 	secret: 'arisanyuk',
-	// resave: false,
-  	// saveUninitialized: true
+	resave: false,
+  	saveUninitialized: true
 }))
 
 // require public

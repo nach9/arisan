@@ -44,6 +44,20 @@ router.get('/signup', function(req, res) {
 	res.render('signup')
 })
 
+router.post('/signup',function(req,res){
+	// let condition={
+	// 	firstName: req.body
+	// 	lastName:
+	// 	phone:
+	// 	email:
+	// 	password:
+	// 	role:'user'
+	// }
+	Models.User.create(req.body).then(newUser=>{
+		res.send('dah')
+	})
+})
+
 router.get('/logout', function (req, res) {
 	req.session.destroy(function(err) {
 		res.redirect('/login')
@@ -51,4 +65,3 @@ router.get('/logout', function (req, res) {
 })
 
 module.exports = router
-

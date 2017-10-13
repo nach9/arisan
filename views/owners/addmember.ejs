@@ -16,20 +16,16 @@
       <div class="card card-login mx-auto mt-5">
       <div class="card-header">Add Member Group</div>
       <div class="card-body">
-        <form action="/login" method="POST">
+        <form action="/owner/detail/<%= groupid %>/addmember" method="POST">
           <div class="form-group">
             <select name="UserId">
             <% rows.forEach((row) => { %>
             <option value="<%= row.id %>"><%= row.getFullName() %></option>
             <% })%>
-            
             </select> 
           </div>
-          <input class="btn btn-primary btn-block" type='submit' value="Submit">
+          <input class="btn btn-primary btn-block" type='submit' value="Add">
         </form>
-        <div class="text-center">
-          <a class="d-block small mt-3" href="/signup">Register an Account</a>
-        </div>
       </div>
       </div>
     </div>

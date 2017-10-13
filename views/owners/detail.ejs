@@ -25,24 +25,31 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Group Name</th>
-                  <th>Group Description</th>
-                  <th>Amount</th>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Email</th>
                   <th>Status</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><%= rows.id %></td>
-                  <td><%= rows.groupName %></td>
-                  <td><%= rows.description %></td>
-                  <td><%= rows.amount %></td>
-                  <td></td>
-                </tr>
+                <% rows.Users.forEach((row) => { %>
+                  <tr>
+                    <td><%= row.id %></td>
+                    <td><%= row.getFullName() %></td>
+                    <td><%= row.phone %></td>
+                    <td><%= row.email %></td>
+                    <td></td>
+                    <td>
+                      <a href="/owner/detail/<%= rows.id %>/<%= row.id %>/delete">Delete</a>
+                    </td>
+                  </tr>
+                <% }) %>
               </tbody>
             </table>
           </div>
         </div>
+        <div class="card-footer small text-muted"><a href="/owner/detail/<%= rows.id %>/addmember">Add Member</a></div>
       </div>
     </div>
     <!-- /content -->

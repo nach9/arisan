@@ -17,6 +17,7 @@ router.get('/',(req,res)=>{
 	}
 	Models.Owner.findAll(condition).then(dataOwner=>{
 		res.render('owners/index', {rows: dataOwner})
+		// res.send(dataOwner[0].Group.groupName)
 	})
 })
 
@@ -47,55 +48,61 @@ router.get('/detail/:groupid' , (req,res)=>{
 	let condition={
 		include:[Models.User]
 	}
-	Models.Group.findById( req.params.groupid,condition).then(dataGroup=>{
+	Models.Group.findById(req.params.groupid, condition).then(dataGroup=>{
 		res.render('owners/detail', {rows: dataGroup})
+		// res.send(dataGroup)
 	})
 })
 
-// belum -----------------------------------------------------------------
-router.get('/:id/detail/:groupid/addmember', (req,res)=>{
+router.get('/detail/:groupid/addmember', (req,res)=>{
 	Models.User.findAll().then((dataUser)=>{
-		res.send(dataUser)
+		// res.send(dataUser)
+		res.render('owners/addmember', {rows: dataUser, groupid: req.params.groupid})
 	})
 })
 
-router.post('/:id/detail/:groupid/addmember', (req,res)=>{
+router.post('/detail/:groupid/addmember', (req,res)=>{
 	let condition={
 		UserId: req.body.UserId,
 		GroupId: req.params.groupid
 	}
-	console.log(condition)
+	// res.send(condition)
 	Models.UserGroup.create(condition).then((newUser)=>{
-		// res.send(newUser)
-		res.render('owners/addmember', {rows: newUser})
+		// res.render('owners/detail', {rows: newUser, groupid: req.params.groupid})
+		res.redirect('/owner')
 	})
 })
 
-router.get('/:id/detail/:groupid/delete', (req,res)=>{
+router.get('/detail/:groupid/:userid/delete', (req,res)=>{
 	let condition={
 		include:[Models.User],
 		where:{
+			// UserId: req.params.userid,
 			id:req.params.groupid
 		}
 	}
-	Models.Group.findAll(condition).then((dataUser)=>{
-		res.send(dataUser)
+	Models.Group.findOne(condition).then((dataUser)=>{
+		// res.send(dataUser.Users[0].getFullName())
+		// res.send(dataUser[0].Users[0].UserGroup)
+		res.render('owners/deletemember', {rows: dataUser, userid: req.params.userid})
+		// res.send(req.params)
 	})
 })
 
-router.post('/:id/detail/:groupid/delete', (req,res)=>{
+router.post('/detail/:groupid/:userid/delete', (req,res)=>{
 	let condition={
 		where:{
-			UserId: req.body.UserId,
-			groupid : req.params.groupid
+			UserId: req.params.userid,
+			GroupId : req.params.groupid
 		}
 	}
+	console.log(condition)
+	// res.send('condition')
 	Models.UserGroup.destroy(condition).then((deletedUser)=>{
-		res.send(deletedUser)
+		// res.send(deletedUser)
+		res.redirect('/owner')
 	})
 })
-
-
 
 
 

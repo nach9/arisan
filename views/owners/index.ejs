@@ -23,6 +23,9 @@
                 <tr>
                   <th>ID</th>
                   <th>Group Name</th>
+                  <th>Group Description</th>
+                  <th>Amount</th>
+                  <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -31,6 +34,9 @@
                 <tr>
                   <td><%= row.Group.id %></td>
                   <td><%= row.Group.groupName %></td>
+                  <td><%= row.Group.description %></td>
+                  <td><%= row.Group.amount %></td>
+                  <td>Not Start</td>
                   <td><a href="/owner/detail/<%= row.Group.id %>">Detail</a></td>
                 </tr>
               <% })%> 
